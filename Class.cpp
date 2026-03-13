@@ -45,25 +45,32 @@ public:
 		}
 		if (choice == "YES" || choice == "Yes" || choice == "yes" || choice == "Y" || choice == "y")
 		{
+			cin.ignore();
 			while (msg != "Exit" && msg != "EXIT")
 			{
 				cout << "To stop sending message. Enter Exit or EXIT." << endl;
-				cin >> msg;
+				getline(cin,msg);
 				if (msg == "EXIT" || msg== "Exit")
 				{
 					break;
 				}
-				priority(msg);
-				deletemessage(msg);
-				c_msg++;
+				else
+				{
+					priority(msg);
+					deletemessage(msg);
+					c_msg++;
+					cin.ignore();
+				}
 			}
 		}
 	}
 	void priority(string message)
 	{
 		string choice;
-		cout << "Do yo want to pin this message? (Yes/No): ";
+		cin.ignore();
+		cout << "Do you want to pin this message? (Yes/No): ";
 		cin >> choice;
+		cin.ignore();
 		while (choice != "YES" && choice != "Yes" && choice != "yes" &&
 			choice != "Y" && choice != "y" &&
 			choice != "NO" && choice != "No" && choice != "no" &&
@@ -81,7 +88,7 @@ public:
 	void deletemessage(string message)
 	{
 		string choice;
-		cout << "Do yo want to delete this message? (Yes/No): ";
+		cout << "Do you want to delete this message? (Yes/No): ";
 		cin >> choice;
 		while (choice != "YES" && choice != "Yes" && choice != "yes" &&
 			choice != "Y" && choice != "y" &&
@@ -120,4 +127,6 @@ int main()
 		obj[i].createmessage();
 		obj[i].display();
 	}
+	delete[] obj;
+	obj = nullptr;
 }
